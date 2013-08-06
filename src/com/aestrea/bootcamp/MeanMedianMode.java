@@ -39,7 +39,7 @@ public class MeanMedianMode {
         return modeElements;
     }
 
-    private int findMedian(ArrayList<Integer> userInput) {
+    private float findMedian(ArrayList<Integer> userInput) {
         boolean isEven = (userInput.size() % 2) == 0;
 
         if (isEven) {
