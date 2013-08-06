@@ -1,24 +1,12 @@
 package com.aestrea.bootcamp;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
+import java.util.HashMap;
 
 public class MeanMedianMode {
-
-
     /**
      *
-     *         List<String> userInput = new ArrayList<String>();
-     int sum;
-     userInput = Arrays.asList(args);
-     List<Integer> userNumberInput = new ArrayList<Integer>();
-     for(String s : userInput) userNumberInput.add(Integer.valueOf(s));
-     for(Integer i : userNumberInput) {
-     //intList.add(Integer.valueOf(s));
-     sum += i;
-     }
      * Prints the mean, median and mode for a list of string arguments that are numbers
      *
      * @param args
@@ -28,20 +16,38 @@ public class MeanMedianMode {
         userInput = convertStringArgsToInteger(args);
 
         System.out.println("Mean: "+findMean(userInput));
-
-        /**
-         * Assuming the array x is sorted and is of length n:
-
-         If n is odd then the median is x[(n-1)/2].
-         If n is even than the median is ( x[n/2] + x[(n/2)-1] ) / 2.
-         */
         Collections.sort(userInput);
-//        for(int i=0;i<userInput.size();i++){
-//            System.out.print(userInput.get(i));
-//        }
         System.out.println("Median: "+findMedian(userInput));
 
-//
+        System.out.println("Mode: "+findMode(userInput));
+    }
+
+    /**
+     *
+     * @param userInput
+     * @return
+     */
+
+    private static ArrayList findMode(ArrayList<Integer> userInput) {
+        HashMap<Integer, Integer> seen = new HashMap();
+        ArrayList<Integer> modeElements = new ArrayList<Integer>();
+        int max = 0;
+
+        for(int i=0;i<userInput.size();i++){
+            if (seen.containsKey(userInput.get(i))){
+                seen.put(userInput.get(i), seen.get(userInput.get(i))+1);
+            } else {
+                seen.put(userInput.get(i),1);
+            }
+            if (seen.get(userInput.get(i)) > max) {
+                max = seen.get(userInput.get(i));
+                modeElements.clear();
+                modeElements.add(userInput.get(i));
+            } else if (seen.get(userInput.get(i)) == max) {
+                modeElements.add(userInput.get(i));
+            }
+        }
+        return modeElements;
     }
 
     private int findMedian(ArrayList<Integer> userInput) {

@@ -1,7 +1,5 @@
 package com.aestrea.bootcamp;
 
-import java.util.ArrayList;
-
 public class Restaurant {
     /**
      *
